@@ -31,7 +31,9 @@ function App(props) {
 
   React.useEffect(() => {
     checkToken();
+  }, []);
 
+  function getData() {
     Promise.all([api.getUser(), api.getInitialCards()])
       .then(([userRes, cardRes]) => {
         //user
@@ -42,7 +44,7 @@ function App(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
 
   function signOut() {
     localStorage.removeItem('token');
@@ -64,6 +66,7 @@ function App(props) {
         .then((res) => {
           if (res) {
             handleLogin(true);
+            getData();
             handleSetUserEmail(res.data.email);
             props.history.push('/');
           }
@@ -204,6 +207,7 @@ function App(props) {
             <Header linkHeader={'/sign-up'} />
             <Login
               handleLogin={handleLogin}
+              getData={getData}
               handleSetUserEmail={handleSetUserEmail}
               handleInfoTooltip={handleInfoTooltip}
             />

@@ -40,7 +40,6 @@ const Register = (props) => {
           action="#"
           className={`popup__form popup__form_name_register`}
           name="register"
-          noValidate
           onSubmit={handleSubmit}
         >
           <fieldset className="popup__set popup__set_theme_black">

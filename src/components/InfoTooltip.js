@@ -12,7 +12,11 @@ const InfoTooltip = (props) => {
           type="button"
           onClick={props.onClose}
         ></button>
-        <img className="popup__tooltip-icon" src={props.isSuccess ? iconDone : iconErr}></img>
+        <img
+          className="popup__tooltip-icon"
+          src={props.isSuccess ? iconDone : iconErr}
+          alt={props.isSuccess ? 'успешно' : 'ошибка'}
+        ></img>
 
         <div className="popup__tooltip-text">
           {props.isSuccess
