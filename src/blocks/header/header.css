@@ -1,0 +1,28 @@
+.header {
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-areas:
+    'email email'
+    'logo burger';
+  color: #ffffff;
+  padding: 28px 30px 31px 27px;
+  border-bottom-width: 1px; /* Толщина линии внизу */
+  border-bottom-style: solid;
+  border-bottom-color: rgba(84, 84, 84, 0.7);
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    grid-template-areas: 'logo  burger';
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding: 45px 0 41px 0;
+  }
+}

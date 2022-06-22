@@ -1,0 +1,13 @@
+.header__email-text {
+  margin: 0%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.header__email-text:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

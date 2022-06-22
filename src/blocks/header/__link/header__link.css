@@ -1,0 +1,15 @@
+.header__link {
+  grid-area: burger;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.header__link:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

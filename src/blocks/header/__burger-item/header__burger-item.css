@@ -1,0 +1,9 @@
+.header__burger-item {
+  height: 3px;
+  background-color: #fff;
+  margin-top: 5px;
+}
+
+.header__burger-item:first-child {
+  margin-top: 0;
+}

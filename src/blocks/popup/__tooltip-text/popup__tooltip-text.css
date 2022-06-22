@@ -1,0 +1,23 @@
+.popup__tooltip-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+  text-align: center;
+  max-width: 244px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__tooltip-text {
+    max-width: 358px;
+    margin-top: 32px;
+    padding-bottom: 60px;
+
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
