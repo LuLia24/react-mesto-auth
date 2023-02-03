@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { login, veryficationToken } from '../utils/auth';
+import api from '../utils/api';
 
 const Login = (props) => {
   const [email, setEmail] = React.useState('');
@@ -21,12 +22,14 @@ const Login = (props) => {
         if (res && res.token) {
           localStorage.setItem('token', res.token);
 
+          api.setAuthorization(res.token)
+
           veryficationToken(localStorage.getItem('token'))
             .then((res) => {
               if (res) {
                 props.handleLogin(true);
                 props.getData();
-                props.handleSetUserEmail(res.data.email);
+                props.handleSetUserEmail(res.email);
                 props.history.push('/');
               } else {
                 props.handleInfoTooltip(false);

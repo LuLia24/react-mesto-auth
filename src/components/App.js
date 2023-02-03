@@ -29,9 +29,34 @@ function App(props) {
   const [cards, setCards] = React.useState([]);
   const [userEmail, setUserEmail] = React.useState('user@email.ru');
 
-  React.useEffect(() => {
-    checkToken();
-  }, []);
+
+
+  React.useEffect(() =>{
+    function checkToken() {
+      if (localStorage.getItem('token')) {
+        const jwt = localStorage.getItem('token');
+  
+        api.setAuthorization(jwt)
+  
+        veryficationToken(jwt)
+          .then((res) => {
+            if (res) {
+              handleLogin(true);
+              getData();
+              handleSetUserEmail(res.email);
+              props.history.push('/');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        props.history.push('/sign-up');
+      }
+    }
+
+    checkToken()
+  }, [props.history]);
 
   function getData() {
     Promise.all([api.getUser(), api.getInitialCards()])
@@ -48,6 +73,7 @@ function App(props) {
 
   function signOut() {
     localStorage.removeItem('token');
+    api.setAuthorization('')
     handleLogin(false);
     handleSetUserEmail('');
     props.history.push('/sign-in');
@@ -58,26 +84,9 @@ function App(props) {
     setIsInfoTooltipPopupOpen(true);
   }
 
-  function checkToken() {
-    if (localStorage.getItem('token')) {
-      const jwt = localStorage.getItem('token');
+  
 
-      veryficationToken(jwt)
-        .then((res) => {
-          if (res) {
-            handleLogin(true);
-            getData();
-            handleSetUserEmail(res.data.email);
-            props.history.push('/');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      props.history.push('/sign-up');
-    }
-  }
+
 
   function handleLogin(log) {
     setLoggedIn(log);
@@ -96,9 +105,9 @@ function App(props) {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-  function handleInfoTooltipPopupOpen() {
-    setIsInfoTooltipPopupOpen(true);
-  }
+  // function handleInfoTooltipPopupOpen() {
+  //   setIsInfoTooltipPopupOpen(true);
+  // }
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -137,7 +146,7 @@ function App(props) {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (isLiked) {
       api
